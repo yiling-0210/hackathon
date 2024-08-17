@@ -5,7 +5,7 @@ const TransferTokenModal = ({ onSubmit, onClose }) => {
   const [walletAddress, setWalletAddress] = useState("");
   const [to, setTo] = useState("");
   const [amount, setAmount] = useState("");
-  const contractAddress = "0xC523A5A3E2A037c9c9fd81fB962db1f87A1ea4A3";
+  const contractAddress = "0x0452b753909346A49f0D485078CF9D7155D6050b";
   const fallbackUrl = "https://maschainworkshop.vercel.app/";
 
   const handleSubmit = (e) => {
@@ -36,7 +36,7 @@ const TransferTokenModal = ({ onSubmit, onClose }) => {
               Recipient Address
             </label>
             <input
-              type="email"
+              type="text"
               id="to"
               value={to}
               onChange={(e) => setTo(e.target.value)}
