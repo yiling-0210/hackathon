@@ -90,6 +90,11 @@ const Header = () => {
     <header className="w-full py-6 lg:py-4 relative border-b">
       <div className="container mx-auto px-8 lg:px-4 flex items-center justify-between">
         <div className="flex items-center">
+          <img 
+            src="/logo.png" 
+            alt="Logo"
+            className="w-12 h-12 mr-2" // Adjust size and margin as needed
+          />
           <h1 className="text-xl font-bold">MedEco System</h1>
         </div>
         <button

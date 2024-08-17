@@ -206,14 +206,15 @@ export default function MainContent() {
   
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center ">
+    <main className="flex min-h-screen flex-col items-center justify-center "
+    style={{
+        backgroundImage: "url('/background.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}>
       <h1 className="text-3xl font-bold text-center">
-        <span className="block text-blue-500" style={{ fontFamily: "Georgia, serif" }}>
-          MedEco System:
-        </span>
-        <span className="block text-blue-500" style={{ fontFamily: "Georgia, serif" }}>
-          Economic System for Health Care using Blockchain Tech
-        </span>
+        <h1 className="text-3xl font-bold mb-4">MedEco System：</h1>
+        <h1 className="text-3xl font-bold mb-4">Economic System for Health Care using Blockchain Tech</h1>
       </h1>
       <p className="text-sm text-gray-500 lowercase font-normal mt-4 text-center">
         {walletAddress ? (
@@ -225,14 +226,14 @@ export default function MainContent() {
               <button
                 onClick={clearWalletAddress}
                 style={{ width: '730.76px', height: '37.38px' }}
-                className="w-full mt-4 border rounded-md py-2 px-4 hover:bg-black hover:text-white transition-all duration-300"
+                className="w-full mt-4 border rounded-md py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 Disconnect Wallet
               </button>
               <button
                 onClick={openMintModal}
                 style={{ width: '730.76px', height: '37.38px' }}
-                className="mt-4 border w-full rounded-md py-2 px-4 hover:bg-black hover:text-white transition-all duration-300"
+                className="mt-4 border w-full rounded-md py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 Mint Token
               </button>
@@ -240,7 +241,7 @@ export default function MainContent() {
               <button
                 onClick={openTransferModal}
                 style={{ width: '730.76px', height: '37.38px' }}
-                className="mt-4 w-full border rounded-md py-2 px-4 hover:bg-black hover:text-white transition-all duration-300"
+                className="mt-4 w-full border rounded-md py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 hover:text-white transition-all duration-300"
               >
                 Transfer Token
               </button>
