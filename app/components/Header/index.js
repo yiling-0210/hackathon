@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CreateWalletModal from "../Create-wallet";
 import { motion, AnimatePresence } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [walletAddress, setWalletAddress] = useState(null);
+
+  useEffect(() => {
+    // This runs only on the client side after the initial render
+    if (typeof window !== "undefined") {
+      const storedWalletAddress = window.sessionStorage.getItem("walletAddress");
+      if (storedWalletAddress) {
+        setWalletAddress(storedWalletAddress);
+      }
+    }
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -36,19 +47,16 @@ const Header = () => {
       }
 
       const result = await response.json();
-      //   console.log("User created:", result);
       const walletAddress = result.result.wallet.wallet_address;
-      //   console.log("Wallet address:", walletAddress);
-      // Store the wallet address in sessionStorage
-      sessionStorage.setItem("walletAddress", walletAddress);
 
       if (!walletAddress) {
         throw new Error("Wallet address not found in the response");
       }
 
+      sessionStorage.setItem("walletAddress", walletAddress);
+
       toast.success(
-        `🦄 User created successfully!
-        Wallet address: ${walletAddress}`,
+        `🦄 User created successfully! Wallet address: ${walletAddress}`,
         {
           position: "bottom-center",
           autoClose: 5000,
@@ -58,8 +66,10 @@ const Header = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
+          onClose: () => location.reload(),
         }
       );
+
       closeModal();
     } catch (error) {
       console.error("Error creating user:", error);
@@ -73,8 +83,6 @@ const Header = () => {
         progress: undefined,
         theme: "light",
       });
-      // Don't send the request if there's an error
-      return;
     }
   };
 
@@ -88,14 +96,9 @@ const Header = () => {
           onClick={openModal}
           className="border rounded-md py-2 px-4 hover:bg-black hover:text-white transition-all duration-300"
         >
-          {typeof window !== "undefined" &&
-          window.sessionStorage.getItem("walletAddress") ? (
+          {walletAddress ? (
             <span className="text-sm">
-              {`${window.sessionStorage
-                .getItem("walletAddress")
-                .slice(0, 6)}...${window.sessionStorage
-                .getItem("walletAddress")
-                .slice(-4)}`}
+              {`${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`}
             </span>
           ) : (
             "Create Wallet"
