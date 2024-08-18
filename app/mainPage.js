@@ -39,6 +39,7 @@ export default function MainContent() {
   const clearWalletAddress = () => {
     sessionStorage.removeItem("walletAddress");
     setWalletAddress(null);
+    location.reload();
   };
 
   const handleMintSubmit = async (data) => {
